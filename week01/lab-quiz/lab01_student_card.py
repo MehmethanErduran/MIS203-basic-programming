@@ -1,0 +1,13 @@
+name = input("Name: ")
+student_id = input("Student ID: ")
+department = input("Department: ")
+github_username = input("GitHub username: ")
+goal = input("Programming goal: ")
+
+print("\n===== STUDENT INTRODUCTION CARD =====")
+print(f"Name: {name}")
+print(f"Student ID: {student_id}")
+print(f"Department: {department}")
+print(f"GitHub: {github_username}")
+print(f"Programming Goal: {goal}")
+print("=====================================")
