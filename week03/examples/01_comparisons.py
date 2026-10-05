@@ -19,12 +19,13 @@ def is_even(n):
 
     Returns:
         _type_: _description_
-    """    
+    """
     return n % 2 == 0
+
 
 print("x is even:", is_even(x))
 print("y is even:", is_even(y))
 
-print(is_even(21))
+is_even(10)
 
 

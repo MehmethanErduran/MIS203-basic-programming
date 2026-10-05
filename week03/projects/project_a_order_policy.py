@@ -42,3 +42,45 @@ else:
     print(f"Shipping:       {shipping:9.2f} TRY")
     print(f"Total:          {total:9.2f} TRY")
     print("=" * 52)
+    
+    from fpdf import FPDF
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.add_font("Arial", "", "/System/Library/Fonts/Supplemental/Arial.ttf")
+    pdf.add_font("Arial", "B", "/System/Library/Fonts/Supplemental/Arial Bold.ttf")
+
+    # Başlık bandı
+    pdf.set_fill_color(30, 60, 114)
+    pdf.set_text_color(255, 255, 255)
+    pdf.set_font("Arial", "B", 20)
+    pdf.cell(0, 18, "Sipariş Teklifi", align="C", fill=True,
+             new_x="LMARGIN", new_y="NEXT")
+
+    pdf.ln(6)
+    pdf.set_text_color(0, 0, 0)
+    pdf.set_font("Arial", "", 12)
+    pdf.cell(0, 8, f"Müşteri: {customer}", new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 8, f"Politika: {policy}", new_x="LMARGIN", new_y="NEXT")
+    pdf.ln(4)
+
+    # Tutar tablosu
+    rows = [
+        ("Sepet tutarı", f"{amount:,.2f} TRY"),
+        ("İndirim", f"-{discount:,.2f} TRY"),
+        ("Kargo", f"{shipping:,.2f} TRY"),
+    ]
+    for label, value in rows:
+        pdf.cell(120, 10, label, border="B")
+        pdf.cell(0, 10, value, border="B", align="R",
+                 new_x="LMARGIN", new_y="NEXT")
+
+    pdf.set_font("Arial", "B", 14)
+    pdf.set_fill_color(230, 236, 245)
+    pdf.cell(120, 12, "TOPLAM", fill=True)
+    pdf.cell(0, 12, f"{total:,.2f} TRY", align="R", fill=True,
+             new_x="LMARGIN", new_y="NEXT")
+
+    pdf.output(f"teklif_{customer.replace(' ', '_')}.pdf")
+    print("PDF oluşturuldu.")
+
